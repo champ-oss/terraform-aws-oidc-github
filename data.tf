@@ -11,10 +11,11 @@ data "aws_iam_policy_document" "this" {
       values   = ["sts.amazonaws.com"]
     }
     dynamic "condition" {
+      for_each = toset(var.trusted_repos)
       content {
         test     = "StringLike"
         variable = "token.actions.githubusercontent.com:sub"
-        values   = var.trusted_repos
+        values   = each.value
       }
     }
   }
