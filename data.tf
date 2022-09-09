@@ -15,9 +15,7 @@ data "aws_iam_policy_document" "this" {
       content {
         test     = "StringLike"
         variable = "token.actions.githubusercontent.com:sub"
-        values = [
-          each.value.values
-        ]
+        values = each.value.values
       }
     }
   }
