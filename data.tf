@@ -10,13 +10,10 @@ data "aws_iam_policy_document" "this" {
       variable = "token.actions.githubusercontent.com:aud"
       values   = ["sts.amazonaws.com"]
     }
-    dynamic "condition" {
-      for_each = toset(var.trusted_repos)
-      content {
-        test     = "StringLike"
-        variable = "token.actions.githubusercontent.com:sub"
-        values   = each.value
-      }
+    condition {
+      test     = "StringLike"
+      values   = var.trusted_repos != [] ? var.trusted_repos : []
+      variable = "token.actions.githubusercontent.com:sub"
     }
   }
 }

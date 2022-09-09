@@ -11,8 +11,8 @@ variable "git" {
 
 variable "trusted_repos" {
   description = "trusted repos to append rule"
-  type        = list(any)
-  default     = []
+  type        = list(string)
+  default     = null
 }
 
 variable "tags" {
