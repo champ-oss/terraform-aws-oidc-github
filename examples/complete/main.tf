@@ -8,6 +8,7 @@ locals {
 
 module "this" {
   source = "../../"
+  git    = local.git
   trusted_repos = {
     values : ["repo:my-org/my-repo:pull_request","org/repo"]
   }
