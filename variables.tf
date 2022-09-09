@@ -11,8 +11,8 @@ variable "git" {
 
 variable "trusted_repos" {
   description = "trusted repos to append rule"
-  type        = map(any)
-  default     = {}
+  type        = list(any)
+  default     = []
 }
 
 variable "tags" {
