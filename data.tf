@@ -1,3 +1,8 @@
+locals {
+  read_repos = var.trusted_repos != "" ? var.trusted_repos : var.trusted_read_repos
+  admin_repos = var.trusted_repos != "" ? var.trusted_repos : var.trusted_admin_repos
+}
+
 data "aws_iam_policy_document" "read" {
   statement {
     principals {
@@ -12,7 +17,7 @@ data "aws_iam_policy_document" "read" {
     }
     condition {
       test     = "StringLike"
-      values   = var.trusted_repos != [] ? var.trusted_repos : var.trusted_read_repos
+      values   = var.trusted_repos != "" ? local.read_repos : null
       variable = "token.actions.githubusercontent.com:sub"
     }
   }
@@ -32,7 +37,7 @@ data "aws_iam_policy_document" "admin" {
     }
     condition {
       test     = "StringLike"
-      values   = var.trusted_repos != [] ? var.trusted_repos : var.trusted_admin_repos
+      values   = var.trusted_repos != "" ? local.admin_repos : null
       variable = "token.actions.githubusercontent.com:sub"
     }
   }
