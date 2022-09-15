@@ -18,7 +18,7 @@ variable "url" {
 variable "trusted_repos" {
   description = "trusted repos to append rule"
   type        = list(string)
-  default     = ""
+  default     = null
 }
 
 variable "trusted_admin_repos" {
