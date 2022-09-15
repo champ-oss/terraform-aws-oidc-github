@@ -24,7 +24,7 @@ resource "aws_iam_role" "admin" {
 resource "aws_iam_role_policy_attachment" "admin" {
   count      = var.enable_admin_role ? 1 : 0
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-  role       = aws_iam_role.admin.name
+  role       = aws_iam_role.admin[0].name
 }
 
 resource "aws_iam_role" "read" {
@@ -38,5 +38,5 @@ resource "aws_iam_role" "read" {
 resource "aws_iam_role_policy_attachment" "read" {
   count      = var.enable_read_role ? 1 : 0
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
-  role       = aws_iam_role.read.name
+  role       = aws_iam_role.read[0].name
 }

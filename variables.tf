@@ -34,13 +34,13 @@ variable "max_session_duration" {
 }
 
 variable "enable_admin_role" {
-  description = "enable admin policy"
+  description = "enable admin role"
   type        = bool
   default     = true
 }
 
 variable "enable_read_role" {
-  description = "enable read policy"
+  description = "enable read role"
   type        = bool
   default     = true
 }
