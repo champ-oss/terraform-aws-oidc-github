@@ -33,13 +33,13 @@ variable "max_session_duration" {
   default     = 3600
 }
 
-variable "enable_admin_policy" {
+variable "enable_admin_role" {
   description = "enable admin policy"
   type        = bool
   default     = true
 }
 
-variable "enable_read_policy" {
+variable "enable_read_role" {
   description = "enable read policy"
   type        = bool
   default     = true
