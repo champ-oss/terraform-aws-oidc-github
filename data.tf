@@ -1,6 +1,6 @@
 locals {
-  read_repos = var.trusted_repos != null ? var.trusted_repos : var.trusted_read_repos
-  admin_repos = var.trusted_repos != null ? var.trusted_repos : var.trusted_admin_repos
+  read_repos = var.trusted_repos != "" ? var.trusted_repos : var.trusted_read_repos
+  admin_repos = var.trusted_repos != "" ? var.trusted_repos : var.trusted_admin_repos
 }
 
 data "aws_iam_policy_document" "read" {
@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "read" {
     }
     condition {
       test     = "StringLike"
-      values   = var.trusted_repos != null ? local.read_repos : null
+      values   = var.trusted_repos != "" ? local.read_repos : null
       variable = "token.actions.githubusercontent.com:sub"
     }
   }
