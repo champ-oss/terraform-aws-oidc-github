@@ -42,7 +42,7 @@ resource "aws_iam_role_policy_attachment" "read" {
 }
 
 resource "aws_iam_role" "custom" {
-  count                = var.custom_policy != null ? var.custom_policy : null
+  count                = var.custom_policy != null ? 1 : 0
   name                 = "${var.git}-custom"
   assume_role_policy   = var.custom_policy
   max_session_duration = var.max_session_duration

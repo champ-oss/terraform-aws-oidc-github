@@ -57,12 +57,6 @@ variable "enable_read_role" {
   default     = true
 }
 
-variable "custom_policy_arns" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role#managed_policy_arns"
-  default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
-  type        = list(string)
-}
-
 variable "custom_policy" {
   type        = any
   description = "point to data.aws_iam_policy_document.custom.json"
