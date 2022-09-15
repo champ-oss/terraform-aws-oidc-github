@@ -6,14 +6,6 @@ locals {
   }
 }
 
-resource "random_string" "identifier" {
-  length  = 5
-  special = false
-  upper   = false
-  lower   = true
-  number  = true
-}
-
 resource "aws_iam_openid_connect_provider" "this" {
   url             = var.url
   client_id_list  = ["sts.amazonaws.com"]
