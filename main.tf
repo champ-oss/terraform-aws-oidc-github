@@ -15,7 +15,7 @@ resource "random_string" "identifier" {
 }
 
 resource "aws_iam_openid_connect_provider" "this" {
-  url             = "https://token.actions.githubusercontent.com"
+  url             = var.url
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [var.thumbprint]
   tags            = merge(local.tags, var.tags)
