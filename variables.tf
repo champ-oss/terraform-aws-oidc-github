@@ -21,6 +21,18 @@ variable "trusted_repos" {
   default     = null
 }
 
+variable "trusted_admin_repos" {
+  description = "trusted repos to append to admin rules"
+  type        = list(string)
+  default     = null
+}
+
+variable "trusted_read_repos" {
+  description = "trusted repos to append rule for read only rules"
+  type        = list(string)
+  default     = null
+}
+
 variable "tags" {
   description = "Tags to assign to resources"
   type        = map(string)
@@ -45,15 +57,14 @@ variable "enable_read_role" {
   default     = true
 }
 
-variable "enable_custom_role" {
-  description = "enable custom role"
-  type        = bool
-  default     = false
-}
-
 variable "custom_policy_arns" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role#managed_policy_arns"
   default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
   type        = list(string)
 }
 
+variable "custom_policy" {
+  type        = any
+  description = "point to data.aws_iam_policy_document.custom.json"
+  default     = null
+}

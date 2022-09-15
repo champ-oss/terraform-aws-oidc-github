@@ -16,7 +16,7 @@ resource "aws_iam_openid_connect_provider" "this" {
 resource "aws_iam_role" "admin" {
   count                = var.enable_admin_role ? 1 : 0
   name                 = "${var.git}-admin"
-  assume_role_policy   = data.aws_iam_policy_document.this.json
+  assume_role_policy   = data.aws_iam_policy_document.admin.json
   max_session_duration = var.max_session_duration
   tags                 = merge(local.tags, var.tags)
 }
@@ -30,7 +30,7 @@ resource "aws_iam_role_policy_attachment" "admin" {
 resource "aws_iam_role" "read" {
   count                = var.enable_read_role ? 1 : 0
   name                 = "${var.git}-read"
-  assume_role_policy   = data.aws_iam_policy_document.this.json
+  assume_role_policy   = data.aws_iam_policy_document.read.json
   max_session_duration = var.max_session_duration
   tags                 = merge(local.tags, var.tags)
 }
@@ -42,15 +42,9 @@ resource "aws_iam_role_policy_attachment" "read" {
 }
 
 resource "aws_iam_role" "custom" {
-  count                = var.enable_custom_role ? 1 : 0
+  count                = var.custom_policy != null ? var.custom_policy : null
   name                 = "${var.git}-custom"
-  assume_role_policy   = data.aws_iam_policy_document.this.json
+  assume_role_policy   = var.custom_policy
   max_session_duration = var.max_session_duration
   tags                 = merge(local.tags, var.tags)
-}
-
-resource "aws_iam_role_policy_attachment" "custom" {
-  count      = var.enable_custom_role ? 1 : 0
-  policy_arn = var.custom_policy_arns
-  role       = aws_iam_role.custom[0].name
 }
