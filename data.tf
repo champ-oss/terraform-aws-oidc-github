@@ -1,5 +1,5 @@
 locals {
-  read_repos = var.trusted_read_repos != null ? var.trusted_read_repos : null
+  read_repos  = var.trusted_read_repos != null ? var.trusted_read_repos : null
   admin_repos = var.trusted_admin_repos != null ? var.trusted_admin_repos : null
 }
 
