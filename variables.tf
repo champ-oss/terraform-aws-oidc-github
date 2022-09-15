@@ -44,3 +44,16 @@ variable "enable_read_role" {
   type        = bool
   default     = true
 }
+
+variable "enable_custom_role" {
+  description = "enable custom role"
+  type        = bool
+  default     = false
+}
+
+variable "custom_policy_arns" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role#managed_policy_arns"
+  default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
+  type        = list(string)
+}
+

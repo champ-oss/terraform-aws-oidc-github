@@ -40,3 +40,17 @@ resource "aws_iam_role_policy_attachment" "read" {
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
   role       = aws_iam_role.read[0].name
 }
+
+resource "aws_iam_role" "custom" {
+  count                = var.enable_custom_role ? 1 : 0
+  name                 = "${var.git}-custom"
+  assume_role_policy   = data.aws_iam_policy_document.this.json
+  max_session_duration = var.max_session_duration
+  tags                 = merge(local.tags, var.tags)
+}
+
+resource "aws_iam_role_policy_attachment" "custom" {
+  count      = var.enable_custom_role ? 1 : 0
+  policy_arn = var.custom_policy_arns
+  role       = aws_iam_role.custom[0].name
+}
