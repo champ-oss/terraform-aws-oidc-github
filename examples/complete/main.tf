@@ -10,8 +10,10 @@ module "this" {
   source = "../../"
   git    = local.git
   url    = "https://token.actions.githubusercontenttest.com"
-  trusted_repos = [
-    "repo:my-org/my-repo:pull_request",
+  trusted_admin_repos = [
     "org/repo"
+  ]
+  trusted_read_repos = [
+    "repo:my-org/my-repo:pull_request"
   ]
 }
