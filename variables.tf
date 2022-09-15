@@ -32,3 +32,15 @@ variable "max_session_duration" {
   type        = number
   default     = 3600
 }
+
+variable "enable_admin_policy" {
+  description = "enable admin policy"
+  type        = bool
+  default     = true
+}
+
+variable "enable_read_policy" {
+  description = "enable read policy"
+  type        = bool
+  default     = true
+}
