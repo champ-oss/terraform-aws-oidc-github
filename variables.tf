@@ -9,6 +9,12 @@ variable "git" {
   type        = string
 }
 
+variable "url" {
+  description = "Name of the oidc url"
+  type        = string
+  default     = "https://token.actions.githubusercontent.com"
+}
+
 variable "trusted_repos" {
   description = "trusted repos to append rule"
   type        = list(string)
@@ -26,4 +32,3 @@ variable "max_session_duration" {
   type        = number
   default     = 3600
 }
-
