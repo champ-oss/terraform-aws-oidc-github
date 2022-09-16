@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "read" {
     }
     condition {
       test     = "StringLike"
-      values   = var.trusted_repos != null ? var.trusted_read_repos : local.read_repos
+      values   = var.trusted_repos != null ? var.trusted_repos : local.read_repos
       variable = "token.actions.githubusercontent.com:sub"
     }
   }
