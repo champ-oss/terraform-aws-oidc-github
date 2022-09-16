@@ -21,6 +21,18 @@ variable "trusted_repos" {
   default     = null
 }
 
+variable "trusted_admin_repos" {
+  description = "trusted repos to append to admin rules"
+  type        = list(string)
+  default     = null
+}
+
+variable "trusted_read_repos" {
+  description = "trusted repos to append rule for read only rules"
+  type        = list(string)
+  default     = null
+}
+
 variable "tags" {
   description = "Tags to assign to resources"
   type        = map(string)
@@ -43,4 +55,10 @@ variable "enable_read_role" {
   description = "enable read role"
   type        = bool
   default     = true
+}
+
+variable "custom_policy" {
+  type        = any
+  description = "point to data.aws_iam_policy_document.custom.json"
+  default     = null
 }
