@@ -62,3 +62,9 @@ variable "custom_policy" {
   description = "point to data.aws_iam_policy_document.custom.json"
   default     = null
 }
+
+variable "enable_oidc_provider" {
+  default     = true
+  description = "enable/disable the creation of the github oidc provider"
+  type        = bool
+}

@@ -7,6 +7,7 @@ locals {
 }
 
 resource "aws_iam_openid_connect_provider" "this" {
+  count           = var.enable_oidc_provider ? 1 : 0
   url             = var.url
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [var.thumbprint]
