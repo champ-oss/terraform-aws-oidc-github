@@ -23,23 +23,23 @@ module "oidc_only" {
   source = "../../"
   git    = local.git
   url    = "https://token.actions.githubusercontenttestoidconly.com"
-  name   = "${local-git}-oidc-"
+  name   = "oidc-github-oidc"
 }
 
 module "read_only" {
   source               = "../../"
   git                  = local.git
-  name                 = "${local-git}-readtest-"
+  name                 = "oidc-github-readtest"
   enable_oidc_provider = false
   enable_admin_role    = false
-  openid_arn           = oidc_only.openid_arn
+  openid_arn           = module.oidc_only.openid_arn
 }
 
 module "admin_only" {
   source               = "../../"
   git                  = local.git
-  name                 = "${local-git}-admintest-"
+  name                 = "oidc-github-admintest"
   enable_oidc_provider = false
   enable_read_role     = false
-  openid_arn           = oidc_only.openid_arn
+  openid_arn           = module.oidc_only.openid_arn
 }
