@@ -6,7 +6,7 @@ locals {
   git = "terraform-aws-oidc"
 }
 
-# deploy all resources
+# deploy all resources at once
 module "this" {
   source = "../../"
   git    = local.git
