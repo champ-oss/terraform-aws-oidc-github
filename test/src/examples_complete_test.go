@@ -3,8 +3,6 @@ package test
 import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"testing"
-	"time"
-
 )
 
 // TestExamplesComplete tests a typical deployment of this module
@@ -19,5 +17,4 @@ func TestExamplesComplete(t *testing.T) {
 	}
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApplyAndIdempotent(t, terraformOptions)
-	time.Sleep(300 * time.Second)
 }
