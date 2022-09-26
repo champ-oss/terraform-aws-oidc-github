@@ -4,7 +4,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "read" {
-  count                = var.enable_read_role ? 1 : 0
+  count = var.enable_read_role ? 1 : 0
   statement {
     principals {
       identifiers = var.openid_arn != null ? [var.openid_arn] : [aws_iam_openid_connect_provider.this[0].arn]
@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "read" {
 }
 
 data "aws_iam_policy_document" "admin" {
-  count                = var.enable_admin_role ? 1 : 0
+  count = var.enable_admin_role ? 1 : 0
   statement {
     principals {
       identifiers = var.openid_arn != null ? [var.openid_arn] : [aws_iam_openid_connect_provider.this[0].arn]
