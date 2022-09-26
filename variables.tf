@@ -26,7 +26,7 @@ variable "trusted_repos" {
   default     = null
 }
 
-variable "openid_arn" {
+variable "oidc_provider_arn" {
   description = "github openid arn"
   type        = string
   default     = null

@@ -32,6 +32,8 @@ module "read_only" {
   name                 = "oidc-github-readtest"
   enable_oidc_provider = false
   enable_admin_role    = false
+  oidc_provider_arn    = module.oidc_only.oidc_provider_arn
+  depends_on           = [module.oidc_only]
 }
 
 module "admin_only" {
@@ -40,4 +42,6 @@ module "admin_only" {
   name                 = "oidc-github-admintest"
   enable_oidc_provider = false
   enable_read_role     = false
+  oidc_provider_arn    = module.oidc_only.oidc_provider_arn
+  depends_on           = [module.oidc_only]
 }

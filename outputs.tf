@@ -18,7 +18,7 @@ output "custom_iam_role_name" {
   value       = var.custom_policy != null ? aws_iam_role.custom[0].name : null
 }
 
-output "oidc_provider" {
+output "oidc_provider_arn" {
   description = "github oidc provider"
-  value       = var.enable_oidc_provider ? aws_iam_openid_connect_provider.this["oidc_provider"] : data.aws_iam_openid_connect_provider.this["oidc_provider"]
+  value       = var.enable_oidc_provider ? aws_iam_openid_connect_provider.this[0].arn : null
 }
