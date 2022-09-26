@@ -5,6 +5,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "read" {
+  count = var.enable_read_role ? 1 : 0
   statement {
     principals {
       identifiers = var.enable_oidc_provider != false ? [local.aws_iam_openid_connect_provider] : [var.oidc_provider_arn]
@@ -25,6 +26,7 @@ data "aws_iam_policy_document" "read" {
 }
 
 data "aws_iam_policy_document" "admin" {
+  count = var.enable_admin_role ? 1 : 0
   statement {
     principals {
       identifiers = var.enable_oidc_provider != false ? [local.aws_iam_openid_connect_provider] : [var.oidc_provider_arn]
