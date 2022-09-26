@@ -5,7 +5,7 @@ provider "aws" {
 locals {
   git = "terraform-aws-oidc"
 }
-
+/*
 module "this" {
   source = "../../"
   git    = local.git
@@ -18,6 +18,7 @@ module "this" {
     "repo:my-org/my-repo:pull_request"
   ]
 }
+*/
 
 module "oidc_only" {
   source            = "../../"
