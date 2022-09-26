@@ -30,6 +30,7 @@ module "oidc_only" {
   trusted_read_repos  = []
 }
 
+/*
 module "read_only" {
   source               = "../../"
   git                  = local.git
@@ -57,3 +58,4 @@ module "admin_only" {
   oidc_provider_arn  = module.oidc_only.oidc_provider_arn
   depends_on         = [module.oidc_only]
 }
+*/
