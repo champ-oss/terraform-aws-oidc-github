@@ -6,10 +6,10 @@ locals {
 data "aws_iam_policy_document" "read" {
   statement {
     principals {
-      identifiers = [aws_iam_openid_connect_provider.this.arn]
+      identifiers = var.openid_arn != null ? [var.openid_arn] : [aws_iam_openid_connect_provider.this[0].arn]
       type        = "Federated"
     }
-    actions = var.openid_arn != null ? [var.openid_arn] : ["sts:AssumeRoleWithWebIdentity"]
+    actions = ["sts:AssumeRoleWithWebIdentity"]
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:aud"
