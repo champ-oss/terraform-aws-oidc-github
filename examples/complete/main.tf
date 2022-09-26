@@ -32,6 +32,9 @@ module "read_only" {
   name                 = "oidc-github-readtest"
   enable_oidc_provider = false
   enable_admin_role    = false
+  trusted_read_repos = [
+    "repo:my-org/my-repo:pull_request"
+  ]
   oidc_provider_arn    = module.oidc_only.oidc_provider_arn
   depends_on           = [module.oidc_only]
 }
@@ -42,6 +45,9 @@ module "admin_only" {
   name                 = "oidc-github-admintest"
   enable_oidc_provider = false
   enable_read_role     = false
+  trusted_admin_repos = [
+    "org/repo"
+  ]
   oidc_provider_arn    = module.oidc_only.oidc_provider_arn
   depends_on           = [module.oidc_only]
 }
