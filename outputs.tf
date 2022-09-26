@@ -20,5 +20,5 @@ output "custom_iam_role_name" {
 
 output "oidc_provider" {
   description = "github oidc provider"
-  value = var.enable_oidc_provider ? aws_iam_openid_connect_provider.this["oidc_provider"] : data.aws_iam_openid_connect_provider.this["oidc_provider"]
+  value       = var.enable_oidc_provider ? aws_iam_openid_connect_provider.this["oidc_provider"] : data.aws_iam_openid_connect_provider.this["oidc_provider"]
 }
