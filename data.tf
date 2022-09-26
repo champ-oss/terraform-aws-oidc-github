@@ -7,7 +7,7 @@ locals {
 data "aws_iam_policy_document" "read" {
   statement {
     principals {
-      identifiers = var.enable_oidc_provider != false ? [var.oidc_provider_arn] : [local.aws_iam_openid_connect_provider]
+      identifiers = var.enable_oidc_provider != false ? [local.aws_iam_openid_connect_provider] : [var.oidc_provider_arn]
       type        = "Federated"
     }
     actions = ["sts:AssumeRoleWithWebIdentity"]
