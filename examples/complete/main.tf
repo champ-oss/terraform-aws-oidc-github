@@ -29,27 +29,31 @@ module "oidc_only" {
 }
 
 module "read_only" {
+  for_each = toset([
+    "terraform-aws-repo1",
+    "terraform-aws-repo2",
+  ])
   source               = "../../"
   git                  = local.git
-  name                 = "oidc-github-readtest"
+  name                 = each.value
   enable_oidc_provider = false
   enable_admin_role    = false
-  trusted_read_repos = [
-    "repo:my-org/my-repo:pull_request"
-  ]
+  trusted_read_repos = concat(formatlist("repo:champtitles/%s:*", each.value), formatlist("repo:champtitles/%s:pull_request", each.value))
   oidc_provider_arn = module.oidc_only.oidc_provider_arn
   depends_on        = [module.oidc_only]
 }
 
 module "admin_only" {
+  for_each = toset([
+    "terraform-aws-repo1",
+    "terraform-aws-repo2",
+  ])
   source               = "../../"
   git                  = local.git
-  name                 = "oidc-github-admintest"
+  name                 = each.value
   enable_oidc_provider = false
   enable_read_role     = false
-  trusted_admin_repos = [
-    "org/repo"
-  ]
+  trusted_admin_repos = formatlist("repo:champtitles/%s:ref:refs/heads/main", each.value)
   oidc_provider_arn = module.oidc_only.oidc_provider_arn
   depends_on        = [module.oidc_only]
 }
