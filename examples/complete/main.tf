@@ -39,9 +39,9 @@ module "read_only" {
   name                 = each.value
   enable_oidc_provider = false
   enable_admin_role    = false
-  trusted_read_repos = concat(formatlist("repo:champtitles/%s:*", each.value), formatlist("repo:champtitles/%s:pull_request", each.value))
-  oidc_provider_arn = module.oidc_only.oidc_provider_arn
-  depends_on        = [module.oidc_only]
+  trusted_read_repos   = concat(formatlist("repo:champtitles/%s:*", each.value), formatlist("repo:champtitles/%s:pull_request", each.value))
+  oidc_provider_arn    = module.oidc_only.oidc_provider_arn
+  depends_on           = [module.oidc_only]
 }
 
 module "admin_only" {
@@ -54,7 +54,7 @@ module "admin_only" {
   name                 = each.value
   enable_oidc_provider = false
   enable_read_role     = false
-  trusted_admin_repos = formatlist("repo:champtitles/%s:ref:refs/heads/main", each.value)
-  oidc_provider_arn = module.oidc_only.oidc_provider_arn
-  depends_on        = [module.oidc_only]
+  trusted_admin_repos  = formatlist("repo:champtitles/%s:ref:refs/heads/main", each.value)
+  oidc_provider_arn    = module.oidc_only.oidc_provider_arn
+  depends_on           = [module.oidc_only]
 }
