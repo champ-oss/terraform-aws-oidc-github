@@ -1,10 +1,11 @@
 locals {
   read_repos  = var.trusted_read_repos != null ? var.trusted_read_repos : null
   admin_repos = var.trusted_admin_repos != null ? var.trusted_admin_repos : null
-  aws_iam_openid_connect_provider = var.enable_oidc_provider ? aws_iam_openid_connect_provider.this["oidc_provider"] : data.aws_iam_openid_connect_provider.this["oidc_provider"]
+  aws_iam_openid_connect_provider = var.enable_oidc_provider ? aws_iam_openid_connect_provider.this[0].arn : data.aws_iam_openid_connect_provider.this.arn
 }
 
 data "aws_iam_openid_connect_provider" "this" {
+  count = var.enable_oidc_provider ? 1 : 0
   url = data.tls_certificate.this.url
 }
 
@@ -15,7 +16,7 @@ data "tls_certificate" "this" {
 data "aws_iam_policy_document" "read" {
   statement {
     principals {
-      identifiers = local.aws_iam_openid_connect_provider.arn
+      identifiers = [local.aws_iam_openid_connect_provider]
       type        = "Federated"
     }
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -35,7 +36,7 @@ data "aws_iam_policy_document" "read" {
 data "aws_iam_policy_document" "admin" {
   statement {
     principals {
-      identifiers = local.aws_iam_openid_connect_provider.arn
+      identifiers = [local.aws_iam_openid_connect_provider]
       type        = "Federated"
     }
     actions = ["sts:AssumeRoleWithWebIdentity"]
