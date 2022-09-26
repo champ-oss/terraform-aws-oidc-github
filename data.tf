@@ -1,6 +1,6 @@
 locals {
-  read_repos                      = var.trusted_read_repos != null ? var.trusted_read_repos : []
-  admin_repos                     = var.trusted_admin_repos != null ? var.trusted_admin_repos : []
+  read_repos                      = var.trusted_read_repos != null ? var.trusted_read_repos : null
+  admin_repos                     = var.trusted_admin_repos != null ? var.trusted_admin_repos : null
   aws_iam_openid_connect_provider = var.enable_oidc_provider ? aws_iam_openid_connect_provider.this[0].arn : ""
 }
 
