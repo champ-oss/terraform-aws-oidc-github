@@ -1,5 +1,9 @@
-# terraform-module-template
+# terraform-aws-oidc-github
 
+Summary: terraform module for aws oidc github
+
+![ci](https://github.com/conventional-changelog/standard-version/workflows/ci/badge.svg)
+[![version](https://img.shields.io/badge/version-1.x-yellow.svg)](https://semver.org)
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
