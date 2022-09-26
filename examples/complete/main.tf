@@ -20,10 +20,12 @@ module "this" {
 }
 
 module "oidc_only" {
-  source = "../../"
-  git    = local.git
-  url    = "https://token.actions.githubusercontenttestoidconly.com"
-  name   = "oidc-github-oidc"
+  source            = "../../"
+  git               = local.git
+  url               = "https://token.actions.githubusercontenttestoidconly.com"
+  name              = "oidc-github-oidc"
+  enable_admin_role = false
+  enable_read_role  = false
 }
 
 module "read_only" {
