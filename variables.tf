@@ -9,6 +9,11 @@ variable "git" {
   type        = string
 }
 
+variable "name" {
+  description = "resource name"
+  type        = string
+}
+
 variable "url" {
   description = "Name of the oidc url"
   type        = string
@@ -18,6 +23,12 @@ variable "url" {
 variable "trusted_repos" {
   description = "trusted repos to append rule"
   type        = list(string)
+  default     = null
+}
+
+variable "openid_arn" {
+  description = "github openid arn"
+  type        = string
   default     = null
 }
 

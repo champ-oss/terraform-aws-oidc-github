@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "read" {
       identifiers = [aws_iam_openid_connect_provider.this.arn]
       type        = "Federated"
     }
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+    actions = var.openid_arn != null ? [var.openid_arn] : ["sts:AssumeRoleWithWebIdentity"]
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:aud"

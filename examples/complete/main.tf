@@ -9,6 +9,7 @@ locals {
 module "this" {
   source = "../../"
   git    = local.git
+  name   = local.git
   url    = "https://token.actions.githubusercontenttest.com"
   trusted_admin_repos = [
     "org/repo"
@@ -16,4 +17,29 @@ module "this" {
   trusted_read_repos = [
     "repo:my-org/my-repo:pull_request"
   ]
+}
+
+module "oidc_only" {
+  source = "../../"
+  git    = local.git
+  url    = "https://token.actions.githubusercontenttestoidconly.com"
+  name   = "${local-git}-oidc-"
+}
+
+module "read_only" {
+  source               = "../../"
+  git                  = local.git
+  name                 = "${local-git}-readtest-"
+  enable_oidc_provider = false
+  enable_admin_role    = false
+  openid_arn           = oidc_only.openid_arn
+}
+
+module "admin_only" {
+  source               = "../../"
+  git                  = local.git
+  name                 = "${local-git}-admintest-"
+  enable_oidc_provider = false
+  enable_read_role     = false
+  openid_arn           = oidc_only.openid_arn
 }
