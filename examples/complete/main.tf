@@ -20,12 +20,14 @@ module "this" {
 }
 
 module "oidc_only" {
-  source            = "../../"
-  git               = local.git
-  url               = "https://token.actions.githubusercontenttestoidconly.com"
-  name              = "oidc-github-oidc"
-  enable_admin_role = false
-  enable_read_role  = false
+  source              = "../../"
+  git                 = local.git
+  url                 = "https://token.actions.githubusercontenttestoidconly.com"
+  name                = "oidc-github-oidc"
+  enable_admin_role   = false
+  enable_read_role    = false
+  trusted_admin_repos = []
+  trusted_read_repos  = []
 }
 
 module "read_only" {
@@ -38,8 +40,8 @@ module "read_only" {
     "repo:my-org/my-repo:pull_request"
   ]
   trusted_admin_repos = []
-  oidc_provider_arn = module.oidc_only.oidc_provider_arn
-  depends_on        = [module.oidc_only]
+  oidc_provider_arn   = module.oidc_only.oidc_provider_arn
+  depends_on          = [module.oidc_only]
 }
 
 module "admin_only" {
@@ -52,6 +54,6 @@ module "admin_only" {
     "org/repo"
   ]
   trusted_read_repos = []
-  oidc_provider_arn = module.oidc_only.oidc_provider_arn
-  depends_on        = [module.oidc_only]
+  oidc_provider_arn  = module.oidc_only.oidc_provider_arn
+  depends_on         = [module.oidc_only]
 }
