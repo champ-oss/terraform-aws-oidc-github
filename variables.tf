@@ -9,6 +9,11 @@ variable "git" {
   type        = string
 }
 
+variable "name" {
+  description = "resource name"
+  type        = string
+}
+
 variable "url" {
   description = "Name of the oidc url"
   type        = string
@@ -18,6 +23,12 @@ variable "url" {
 variable "trusted_repos" {
   description = "trusted repos to append rule"
   type        = list(string)
+  default     = null
+}
+
+variable "oidc_provider_arn" {
+  description = "github openid arn"
+  type        = string
   default     = null
 }
 
@@ -61,4 +72,10 @@ variable "custom_policy" {
   type        = any
   description = "point to data.aws_iam_policy_document.custom.json"
   default     = null
+}
+
+variable "enable_oidc_provider" {
+  default     = true
+  description = "enable/disable the creation of the github oidc provider"
+  type        = bool
 }

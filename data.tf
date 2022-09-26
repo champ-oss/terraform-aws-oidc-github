@@ -1,12 +1,14 @@
 locals {
-  read_repos  = var.trusted_read_repos != null ? var.trusted_read_repos : null
-  admin_repos = var.trusted_admin_repos != null ? var.trusted_admin_repos : null
+  read_repos                      = var.trusted_read_repos != null ? var.trusted_read_repos : null
+  admin_repos                     = var.trusted_admin_repos != null ? var.trusted_admin_repos : null
+  aws_iam_openid_connect_provider = var.enable_oidc_provider != false ? aws_iam_openid_connect_provider.this[0].arn : null
 }
 
 data "aws_iam_policy_document" "read" {
+  count = var.enable_read_role ? 1 : 0
   statement {
     principals {
-      identifiers = [aws_iam_openid_connect_provider.this.arn]
+      identifiers = var.enable_oidc_provider != false ? [local.aws_iam_openid_connect_provider] : [var.oidc_provider_arn]
       type        = "Federated"
     }
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -24,9 +26,10 @@ data "aws_iam_policy_document" "read" {
 }
 
 data "aws_iam_policy_document" "admin" {
+  count = var.enable_admin_role ? 1 : 0
   statement {
     principals {
-      identifiers = [aws_iam_openid_connect_provider.this.arn]
+      identifiers = var.enable_oidc_provider != false ? [local.aws_iam_openid_connect_provider] : [var.oidc_provider_arn]
       type        = "Federated"
     }
     actions = ["sts:AssumeRoleWithWebIdentity"]
