@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "read" {
 data "aws_iam_policy_document" "admin" {
   statement {
     principals {
-      identifiers = [aws_iam_openid_connect_provider.this.arn]
+      identifiers = var.openid_arn != null ? [var.openid_arn] : [aws_iam_openid_connect_provider.this[0].arn]
       type        = "Federated"
     }
     actions = ["sts:AssumeRoleWithWebIdentity"]
