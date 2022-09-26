@@ -6,6 +6,7 @@ locals {
   git = "terraform-aws-oidc"
 }
 
+# deploy all resources
 module "this" {
   source = "../../"
   git    = local.git
@@ -19,6 +20,7 @@ module "this" {
   ]
 }
 
+# deploy oidc provider only
 module "oidc_only" {
   source            = "../../"
   git               = local.git
@@ -28,6 +30,7 @@ module "oidc_only" {
   enable_read_role  = false
 }
 
+# create read only roles for following repos
 module "read_only" {
   for_each = toset([
     "terraform-aws-repo1",
@@ -43,6 +46,7 @@ module "read_only" {
   depends_on           = [module.oidc_only]
 }
 
+# create admin only roles for following repos
 module "admin_only" {
   for_each = toset([
     "terraform-aws-repo1",
