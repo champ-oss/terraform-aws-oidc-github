@@ -17,7 +17,7 @@ resource "aws_iam_openid_connect_provider" "this" {
 resource "aws_iam_role" "admin" {
   count                = var.enable_admin_role ? 1 : 0
   name                 = "${var.name}-admin"
-  assume_role_policy   = data.aws_iam_policy_document.admin[0].json
+  assume_role_policy   = data.aws_iam_policy_document.admin.json
   max_session_duration = var.max_session_duration
   tags                 = merge(local.tags, var.tags)
 }
@@ -31,7 +31,7 @@ resource "aws_iam_role_policy_attachment" "admin" {
 resource "aws_iam_role" "read" {
   count                = var.enable_read_role ? 1 : 0
   name                 = "${var.name}-read"
-  assume_role_policy   = data.aws_iam_policy_document.read[0].json
+  assume_role_policy   = data.aws_iam_policy_document.read.json
   max_session_duration = var.max_session_duration
   tags                 = merge(local.tags, var.tags)
 }

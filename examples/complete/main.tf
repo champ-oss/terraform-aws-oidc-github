@@ -35,7 +35,6 @@ module "read_only" {
   trusted_read_repos = [
     "repo:my-org/my-repo:pull_request"
   ]
-  trusted_admin_repos = []
   oidc_provider_arn = module.oidc_only.oidc_provider_arn
   depends_on        = [module.oidc_only]
 }
@@ -49,7 +48,6 @@ module "admin_only" {
   trusted_admin_repos = [
     "org/repo"
   ]
-  trusted_read_repos = []
   oidc_provider_arn = module.oidc_only.oidc_provider_arn
   depends_on        = [module.oidc_only]
 }
