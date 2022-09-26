@@ -19,6 +19,8 @@ module "this" {
   ]
 }
 
+/*
+
 module "oidc_only" {
   source              = "../../"
   git                 = local.git
@@ -30,7 +32,7 @@ module "oidc_only" {
   trusted_read_repos  = []
 }
 
-/*
+
 module "read_only" {
   source               = "../../"
   git                  = local.git
