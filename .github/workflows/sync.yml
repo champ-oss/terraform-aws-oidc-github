@@ -1,3 +1,5 @@
+name: sync
+
 on:
   workflow_dispatch:
   schedule:
@@ -10,8 +12,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.ACTION_TOKEN }}
-
-      - uses: champ-oss/file-sync@v1.0.66-2c16dc9
+      - uses: champ-oss/file-sync@main
         with:
           token: ${{ secrets.ACTION_TOKEN }}
           repo: champ-oss/terraform-module-template
@@ -25,3 +26,7 @@ jobs:
             .github/workflows/module.yml
             .github/workflows/release.yml
             .github/workflows/sonar.yml
+            .github/workflows/sync.yml
+            .github/workflows/doc.yml
+          delete-files: |
+            .github/workflows/update-lockfile.yml
